@@ -1,0 +1,148 @@
+<sub-header colore="colore" frutto="frutto"></sub-header>
+<div class="row">
+  <div class="col s12 m3 fermo hide-on-small-only" lazy-render>
+    <div class="row operazioni">
+      <h5 class="center-align">{{operazioni}}</h5>
+      <div ng-slide-down="mode === 'insert'" lazy-render>
+        <form-prodotto prodotto="prodotto" prodotti="prodotti" on-submit="aggiungiProdotto(valido)" submit-text="Inserisci" on-discard="viewMode()"></form-prodotto>
+      </div>
+      <div ng-slide-down="mode === 'edit' && selezionato" lazy-render>
+        <form-prodotto prodotto="prodotto" prodotti="prodotti" on-submit="salva(valido)" submit-text="Salva" on-discard="viewMode()"></form-prodotto>
+      </div>
+      <div  ng-slide-down="mode === 'delete' && selezionato" lazy-render>
+        <div>
+          <ul class="collection with-header">
+            <li class="collection-header"><h5>Cancellare il carico:</h5></li>
+            <li class="collection-item"><b>Tipo Prodotto: </b>{{prodotto.tipoProdotto}}</li>
+            <li class="collection-item"><b>Nome Commerciale: </b>{{prodotto.nomeCommerciale}}</li>
+            <li class="collection-item"><b>Unità di misura: </b>{{prodotto.unita}}</li>
+            <li class="collection-item"><b>Quantità: </b>{{prodotto.quantita}}</li>
+            <li class="collection-item"><b>Data di Carico </b>{{prodotto.data | date:'dd-MM-yyyy'}}</li>
+            <li class="collection-item"><b>Carenza: </b>{{prodotto.carenza}}</li>
+          </ul>
+        </div>
+        <div class="row">
+          <div class="input-field col offset-m1 s12 m10">
+            <div class="row">
+              <button type="submit" class="waves-effect waves-light btn-large col s5" ng-click="elimina()">Si</button>
+              <button class="waves-effect waves-light btn-large red col offset-s2 s5" ng-click="viewMode()" >No</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div ng-slide-down="mode === 'view' && selezionato" lazy-render>
+        <div>
+          <ul class="collection with-header" style="margin-bottom: 0">
+            <li class="collection-header"><h5>Carico selezionato:</h5></li>
+            <li class="collection-item"><b>Tipo Prodotto: </b>{{prodotto.tipoProdotto}}</li>
+            <li class="collection-item"><b>Nome Commerciale: </b>{{prodotto.nomeCommerciale}}</li>
+            <li class="collection-item"><b>Unità di misura: </b>{{prodotto.unita}}</li>
+            <li class="collection-item"><b>Quantità: </b>{{prodotto.quantita}}</li>
+            <li class="collection-item"><b>Data di Carico </b>{{prodotto.data | date:'dd-MM-yyyy'}}</li>
+            <li class="collection-item"><b>Carenza: </b>{{prodotto.carenza}}</li>
+          </ul>
+        </div>
+        <div class="row" >
+          <a class="waves-effect waves-light btn-large margin-button amber col s5" ng-click="editMode()">
+            Modifica
+          </a>
+          <a class="waves-effect waves-light btn-large margin-button red col offset-s2 s5" ng-click="deleteMode()">
+            Elimina Carico
+          </a>
+          <a class="waves-effect waves-light btn-large margin-button col s12" ng-click="insertMode()">
+            <i class="material-icons right">add_circle_outline</i>Nuovo Carico
+          </a>
+        </div>
+
+
+      </div>
+      <div ng-slide-down="mode === 'edit' && !selezionato" lazy-render>
+        <h4 class="center-align">Fai Click sulla riga del carico da modificare</h4>
+        <div class="row">
+          <button class="waves-effect waves-light btn-large red col offset-s2 s8" ng-click="viewMode()" >Annulla</button>
+        </div>
+      </div>
+      <div ng-slide-down="mode === 'delete' && !selezionato" lazy-render>
+        <h4 class="center-align">Fai Click sulla riga del carico da eliminare</h4>
+        <div class="row">
+          <button class="waves-effect waves-light btn-large red col offset-s2 s8" ng-click="viewMode()" >Annulla</button>
+        </div>
+      </div>
+      <div ng-show="mode === 'view' && !selezionato" class="animate">
+        <div class="row">
+          <a class="waves-effect waves-light btn-large margin-button col s12" ng-click="insertMode()">
+            <i class="material-icons right">add_circle_outline</i>Nuovo Carico
+          </a>
+          <a class="waves-effect waves-light btn-large margin-button amber col s12" ng-click="editMode()">
+            <i class="material-icons right">mode_edit</i>Modifica Carico
+          </a>
+          <a class="waves-effect waves-light btn-large margin-button red col s12" ng-click="deleteMode()">
+            <i class="material-icons right">delete</i>Elimina Carico
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col offset-m3 s12 m9 margin-table no-padding-on-small">
+    <div class="row">
+      <div class="col s12 no-padding-on-small">
+        <div class="col s12 m9 fermo-tab z-depth-1 no-padding-on-small davanti">
+          <ul class="tabs davanti" tabs>
+            <li class="tab col s6"><a href="#test1" ng-click="viewMode()">Prodotti</a></li>
+            <li class="tab col s6"><a class="active" href="#carichi">Carichi</a></li>
+          </ul>
+        </div>
+        <div id="carichi" class="col s12 no-padding-on-small">
+          <table class="bordered highlight responsive-table" ng-hide="loading">
+            <thead class="grey lighten-2 z-depth-1">
+              <tr>
+                <th data-field="tipo-prodotto">Tipo Prodotto</th>
+                <th data-field="nome-commerciale">Nome Commerciale</th>
+                <th data-field="unita-di-misura">Unit&agrave di Misura</th>
+                <th data-field="giacenza">Giacenza</th>
+                <th data-field="data-di-carico">Data di Carico</th>
+                <th data-field="carenza">Carenza (gg)</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody >
+              <tr ng-repeat="p in prodotti" class=" pointer" ng-animate="'animate'" ng-click="selected(p)">
+                <td>
+                  <span>{{p.tipoProdotto}}</span>
+                </td>
+                <td>
+                  <span>{{p.nomeCommerciale}}</span>
+                </td>
+                <td>
+                  <span>{{p.unita}}</span>
+                </td>
+                <td>
+                  <span>{{p.quantita}}</span>
+                </td>
+                <td>
+                  <span >{{p.data | date:'dd-MM-yyyy'}}</span>
+                </td>
+                <td>
+                  <span>{{p.carenza}}</span>
+                </td>
+                <td>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <spinner-loader></spinner-loader>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+  $( document ).ready(function() {
+    $('.fermo-tab').width($('#carichi').width());
+  });
+</script>
+
+
+

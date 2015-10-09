@@ -1,0 +1,274 @@
+// bower:scss
+@import "materialize/sass/materialize.scss";
+// endbower
+
+body {
+  font-family: "Roboto", sans-serif;
+  line-height: 1.5;
+  font-weight: normal;
+}
+
+.browsehappy {
+  margin: 0.2em 0;
+  background: #ccc;
+  color: #000;
+  padding: 0.2em 0;
+}
+
+body {
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+
+  @extend .grey-text, .text-darken-4;
+}
+
+main {
+  flex: 1 0 auto;
+  height: 100%;
+}
+
+.no-padding {
+  padding: 0;
+}
+
+.davanti {
+  z-index: 2;
+}
+
+nav .button-collapse i {
+  font-size: 2.2rem;
+}
+
+.side-nav a {
+  font-size: 1.2rem;
+}
+
+a:hover {
+  text-decoration: none;
+}
+
+div.ta-toolbar .btn{
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+.select-wrapper input.select-dropdown, input[type=text], input[type=password], input[type=email], input[type=url], input[type=time], input[type=date], input[type=datetime-local], input[type=tel], input[type=number], input[type=search], textarea.materialize-textarea {
+  margin-bottom: 0;
+}
+
+.margine {
+  margin-top: 1.5rem;
+}
+
+textarea.materialize-textarea {
+  min-height: 1rem;
+  height: 1rem;
+}
+
+
+/*****card******/
+ul.card-action-buttons {
+  margin: -26px 10px 0px 0px;
+  text-align: right;
+}
+
+ul.card-action-buttons li {
+  display: inline-block;
+  padding-left: 5px;
+}
+
+.card-content {
+  padding: 5px 10px 5px 10px;
+}
+
+.card-image {
+  height: 180px;
+  overflow: hidden;
+  background-position: center;
+  background-size: cover;
+}
+/*****************/
+
+.articolo img {
+  max-width: 100%;
+  height: auto;
+}
+
+.carousel {
+  height: 300px;
+}
+
+[class^="flaticon-"]:before, [class*=" flaticon-"]:before, [class^="flaticon-"]:after, [class*=" flaticon-"]:after {
+  font-size: 2rem;
+  margin-left: 20px;
+  margin-right: 20px;
+}
+
+.btn-extra-small {
+  height: 30px;
+  width: 30px;
+  line-height: 30px;
+}
+
+.btn-extra-small i {
+  font-size: 1.2rem;
+  line-height: 30px;
+}
+
+.fixed-center {
+  position: fixed;
+  margin-top: 50%;
+  margin-right: 50%;
+  right: -32px;
+}
+
+.pointer {
+  cursor: pointer;
+}
+
+input[type=text] + label:after, input[type=password] + label:after, input[type=email] + label:after, input[type=url] + label:after, input[type=time] + label:after, input[type=date] + label:after, input[type=datetime-local] + label:after, input[type=tel] + label:after, input[type=number] + label:after, input[type=search] + label:after, textarea.materialize-textarea + label:after {
+  top: 35px
+}
+
+.input-field label {
+  width: 100%;
+}
+
+.animate{
+
+  -webkit-transition:all cubic-bezier(0.250, 0.460, 0.450, 0.940) 1.5s;
+  -moz-transition:all cubic-bezier(0.250, 0.460, 0.450, 0.940) 1.5s;
+  -o-transition:all cubic-bezier(0.250, 0.460, 0.450, 0.940) 1.5s;
+  transition:all cubic-bezier(0.250, 0.460, 0.450, 0.940) 1.5s;
+
+}
+
+
+
+.animate.ng-hide{
+  opacity: 0;
+  display: block !important;
+}
+
+.animate-enter,
+.animate-leave
+{
+  -webkit-transition: 400ms cubic-bezier(0.250, 0.250, 0.750, 0.750) all;
+  -moz-transition: 400ms cubic-bezier(0.250, 0.250, 0.750, 0.750) all;
+  -ms-transition: 400ms cubic-bezier(0.250, 0.250, 0.750, 0.750) all;
+  -o-transition: 400ms cubic-bezier(0.250, 0.250, 0.750, 0.750) all;
+  transition: 400ms cubic-bezier(0.250, 0.250, 0.750, 0.750) all;
+  position: relative;
+  display: block;
+  overflow: hidden;
+  text-overflow: clip;
+  white-space:nowrap;
+}
+
+.animate-leave.animate-leave-active,
+.animate-enter {
+  opacity: 0;
+  width: 0px;
+  height: 0px;
+}
+
+.animate-enter.animate-enter-active,
+.animate-leave {
+  opacity: 1;
+  width: 150px;
+  height: 30px;
+}
+
+
+
+
+@media #{$medium-and-up} {
+  .v-center {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  .fermo {
+    position: fixed;
+    left:0;
+    top:128px;
+  }
+  .fermo-tab {
+    position: fixed;
+    top:128px;
+    width:inherit;
+  }
+
+  .fixed-center {
+    position: fixed;
+    margin-top:10%;
+    margin-right: 37.5%;
+    right: -32px;
+  }
+
+  .fermo-nav {
+    position: fixed;
+    top:64px
+  }
+
+  .margin-table {
+    margin-top: 64px;
+  }
+
+  .margin-button {
+    margin-top: 15px;
+  }
+
+}
+
+
+@media #{$small-and-down} {
+  nav .brand-logo {
+    font-size: 1.5rem;
+  }
+
+  ul.side-nav {
+    top: 56px;
+  }
+
+  .btn-floating.btn-medium {
+    height: 37px;
+    width: 37px;
+    line-height: 56px;
+    top: 7.5px;
+  }
+
+  .btn-floating.btn-medium i {
+    height: 37px;
+    line-height: 37px;
+  }
+
+  .row .col.no-padding-on-small {
+    padding: 0;
+  }
+
+  #menu-laterale i:before {
+    font-size: 2rem;
+    margin-right: 20px;
+    margin-left: 20px;
+  }
+
+}
+
+@media #{$medium-and-up} {
+  ul.side-nav {
+    top: 64px;
+  }
+  .btn-floating.btn-medium {
+    height: 56px;
+    width: 56px;
+    line-height: 56px;
+    top: 2.5px;
+  }
+
+  .btn-floating.btn-medium i {
+    height: 56px;
+    line-height: 56px;
+  }
+}

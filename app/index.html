@@ -1,0 +1,125 @@
+<!doctype html>
+<html class="no-js">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width">
+
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="https://code.ionicframework.com/ionicons/1.5.2/css/ionicons.min.css" rel="stylesheet">
+    <link href="https://www.google.com/fonts#UsePlace:use/Collection:Roboto:400,300,700,900italic" rel="stylesheet">
+    <link rel="stylesheet" href="assets/flaticon.css">
+    <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+    <!-- build:css(.) styles/vendor.css -->
+    <!-- bower:css -->
+    <link rel="stylesheet" href="bower_components/materialize/bin/materialize.css" />
+    <link rel="stylesheet" href="bower_components/angucomplete-alt/angucomplete-alt.css" />
+    <!-- endbower -->
+    <!-- endbuild -->
+    <!-- build:css(.tmp) styles/main.css -->
+    <link rel="stylesheet" href="styles/main.css">
+
+    <!-- endbuild -->
+  </head>
+  <body ng-app="magazzinoApp">
+    <!--[if lt IE 7]>
+      <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+    <![endif]-->
+
+    <!-- Add your site or application content here -->
+    <header ng-cloak="">
+
+      <div class="navbar-fixed">
+        <nav>
+          <a href="#" class="button-collapse btn-floating btn-medium"
+             data-activates="menu-laterale" data-sidenav="left"
+             data-closeonclick="true">
+            <i class="material-icons">menu</i>
+          </a>
+          <div class="nav-wrapper container">
+            <a href="#!" class="brand-logo center">Az. Agricola Maschi Claudio</a>
+            <ul class="left hide-on-med-and-down">
+              <li><a href="#/"><i class="icon ion-home left"></i>Home</a></li>
+            </ul>
+            <ul class="right hide-on-med-and-down">
+              <li><a href="#/login"><i class="icon ion-log-in left"></i>Login</a></li>
+            </ul>
+          </div>
+        </nav>
+      </div>
+
+    </header>
+
+    <main >
+      <ul id="menu-laterale" class="side-nav hide-on-large-only">
+
+        <li class="no-padding"><nav class="top-nav teal"><div class="brand-logo center-align">Menù</div></nav></li>
+        <li><a href="#/"><i class="icon ion-home left"></i>Home</a></li>
+        <li><a href="#/magazzino"><i class="icon flaticon-farm4 brown-text text-lighten-2"></i>Magazzino</a></li>
+        <li><a href="#/frutto/Ciliegio"><i class="icon flaticon-fruit82 red-text text-accent-4"></i>Ciliegio</a></li>
+        <li><a href="#/frutto/Albicocco"><i class="icon flaticon-fruit124 orange-text text-darken-2"></i>Albicocco</a></li>
+        <li><a href="#/frutto/Vite"><i class="icon flaticon-fruit72 light-green-text text-darken-4"></i>Vite</a></li>
+        <li><a href="#/frutto/Seminativo"><i class="icon flaticon-ingredient yellow-text"></i>Seminativo</a></li>
+        <li><a href="#/frutto/Extra"><i class="icon flaticon-farming green-text text-accent-4"></i>Extra</a></li>
+        <li><a href="#/login"><i class="icon ion-log-in left"></i>Login</a></li>
+      </ul>
+      <div ng-view=""></div>
+    </main>
+
+
+    <!-- Google Analytics: change UA-XXXXX-X to be your site's ID -->
+     <script>
+       !function(A,n,g,u,l,a,r){A.GoogleAnalyticsObject=l,A[l]=A[l]||function(){
+       (A[l].q=A[l].q||[]).push(arguments)},A[l].l=+new Date,a=n.createElement(g),
+       r=n.getElementsByTagName(g)[0],a.src=u,r.parentNode.insertBefore(a,r)
+       }(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+       ga('create', 'UA-XXXXX-X');
+       ga('send', 'pageview');
+    </script>
+
+    <!-- build:js(.) scripts/vendor.js -->
+    <!-- bower:js -->
+    <script src="bower_components/jquery/dist/jquery.js"></script>
+    <script src="bower_components/angular/angular.js"></script>
+    <script src="bower_components/firebase/firebase.js"></script>
+    <script src="bower_components/angularfire/dist/angularfire.js"></script>
+    <script src="bower_components/angular-animate/angular-animate.js"></script>
+    <script src="bower_components/angular-cookies/angular-cookies.js"></script>
+    <script src="bower_components/angular-resource/angular-resource.js"></script>
+    <script src="bower_components/angular-route/angular-route.js"></script>
+    <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
+    <script src="bower_components/angular-touch/angular-touch.js"></script>
+    <script src="bower_components/materialize/bin/materialize.js"></script>
+    <script src="bower_components/angular-materialize/src/angular-materialize.js"></script>
+    <script src="bower_components/angucomplete-alt/angucomplete-alt.js"></script>
+    <script src="bower_components/ng-slide-down/dist/ng-slide-down.js"></script>
+    <!-- endbower -->
+    <!-- endbuild -->
+
+        <!-- build:js({.tmp,app}) scripts/scripts.js -->
+        <script src="scripts/app.js"></script>
+        <script src="scripts/controllers/main.js"></script>
+        <script src="scripts/angularfire/config.js"></script>
+        <script src="scripts/angularfire/firebase.ref.js"></script>
+        <script src="scripts\controllers\chat.js"></script>
+        <script src="scripts\filters\reverse.js"></script>
+        <script src="scripts/angularfire/auth.js"></script>
+        <script src="scripts\controllers\login.js"></script>
+        <script src="scripts\controllers\account.js"></script>
+        <script src="scripts/directives/ngShowAuth.js"></script>
+        <script src="scripts/directives/ngHideAuth.js"></script>
+        <script src="scripts\routes.js"></script>
+        <script src="scripts/controllers/magazzino.js"></script>
+        <script src="scripts/controllers/frutto.js"></script>
+        <script src="scripts/directives/modifica-data.js"></script>
+        <script src="scripts/controllers/magazzino2.js"></script>
+        <script src="scripts/directives/sub-header.js"></script>
+        <script src="scripts/directives/spinner-loader.js"></script>
+        <script src="scripts/directives/inserisci-carico.js"></script>
+        <script src="scripts/directives/form-prodotto.js"></script>
+        <script src="scripts/directives/my-autocomplete.js"></script>
+        <!-- endbuild -->
+</body>
+</html>

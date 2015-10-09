@@ -1,0 +1,219 @@
+<nav class=" brown lighten-2 administrator-nav fermo-nav">
+  <div class="nav-wrapper">
+    <div class="container">
+      <a href="#" class="brand-logo center">Magazzino</a>
+      <ul class="left hide-on-med-and-down">
+        <li tooltipped data-position="bottom" data-delay="50" data-tooltip="Magazzino"><a href="#/magazzino"><i class="icon flaticon-farm left brown-text text-lighten-2"></i></a></li>
+        <li tooltipped data-position="bottom" data-delay="50" data-tooltip="Ciliegio"><a href="#/frutto/Ciliegio"><i class="icon flaticon-fruit82 left red-text text-accent-4"></i></a></li>
+        <li tooltipped data-position="bottom" data-delay="50" data-tooltip="Albicocco"><a href="#/frutto/Albicocco"><i class="icon flaticon-fruit124 left orange-text text-darken-2"></i></a></li>
+      </ul>
+      <ul class="right hide-on-med-and-down">
+        <li tooltipped data-position="bottom" data-delay="50" data-tooltip="Vite"><a href="#/frutto/Vite"><i class="icon flaticon-fruit72 left light-green-text text-darken-4"></i></a></li>
+        <li tooltipped data-position="bottom" data-delay="50" data-tooltip="Seminativo"><a href="#/frutto/Seminativo"><i class="icon flaticon-ingredient left yellow-text"></i></a></li>
+        <li tooltipped data-position="bottom" data-delay="50" data-tooltip="Extra"><a href="#/frutto/Extra"><i class="icon flaticon-farming left green-text text-accent-4"></i></a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+<div class="row">
+  <div class="col s12 m3 fermo">
+    <div class="row">
+      <h5 class="center-align">Inserisci Prodotto</h5>
+      <form name="prodottoForm" ng-submit="aggiungiProdotto(prodottoForm.$valid)" novalidate>
+        <div class="input-field col offset-m1 s12 m10">
+          <modifica-data modifica="false" label="Data Carico" ng-model="prodotto.data"></modifica-data>
+        </div>
+        <div class="input-field col offset-m1 s12 m10">
+          <input id="tipo-prodotto" ng-model="prodotto.tipoProdotto" type="text" class="validate">
+          <label for="tipo-prodotto">Tipo Prodotto</label>
+        </div>
+        <div class="input-field col offset-m1 s12 m10">
+          <angucomplete-alt id="nome-commerciale"
+                            placeholder="Nome Commerciale"
+                            pause="100"
+                            selected-object="prodottoSelezionato"
+                            local-data="prodotti"
+                            search-fields="nomeCommerciale"
+                            title-field="nomeCommerciale"
+                            minlength="1"
+                            input-changed="selezionato"
+            />
+        </div>
+        <div class="input-field col offset-m1 s6 m5 ">
+          <input id="quantita" ng-model="prodotto.quantita" type="number" ng-pattern="/^[0-9]+(\.[0-9]{1,2})?$/" step="0.01">
+          <label for="quantita">Quantit&agrave</label>
+        </div>
+        <div class="input-field col s6 m5">
+          <select class="" ng-model="prodotto.unita" material-select watch>
+            <option>Kg</option>
+            <option>L</option>
+          </select>
+          <label>Unit&agrave di misura</label>
+        </div>
+        <div class="input-field col offset-m1 s12 m10">
+          <input id="carenza" ng-model="prodotto.carenza" type="number" class="validate" ng-pattern="/^[0-9]+(\.[0-9]{1,2})?$/" step="0.01">
+          <label for="carenza">Carenza</label>
+        </div>
+
+        <div class="row">
+          <div class="input-field col s12">
+            <button type="submit" class="waves-effect waves-light btn-large col offset-s3 s6" >Inserisci</button>
+          </div>
+        </div>
+      </form>
+    </div>
+
+  </div>
+  <div class="col offset-m3 s12 m9 margin-table">
+    <div class="row">
+      <table class="striped highlight responsive-table">
+        <thead>
+        <tr>
+          <th data-field="tipo-prodotto">Tipo Prodotto</th>
+          <th data-field="nome-commerciale">Nome Commerciale</th>
+          <th data-field="unita-di-misura">Unit&agrave di Misura</th>
+          <th data-field="giacenza">Giacenza</th>
+          <th data-field="data-di-carico">Data di Carico</th>
+          <th data-field="carenza">Carenza (gg)</th>
+          <th></th>
+        </tr>
+        </thead>
+
+        <tbody ng-hide="loading">
+        <tr ng-repeat="p in prodotti">
+          <td>
+            <span ng-hide="modificando.$id == p.$id">{{p.tipoProdotto}}</span>
+            <input ng-show="modificando.$id == p.$id" ng-model="p.tipoProdotto" type="text" class="validate">
+          </td>
+          <td>
+            <span ng-hide="modificando.$id == p.$id">{{p.nomeCommerciale}}</span>
+            <input ng-show="modificando.$id == p.$id" ng-model="p.nomeCommerciale" type="text" class="validate">
+          </td>
+          <td>
+            <span ng-hide="modificando.$id == p.$id">{{p.unita}}</span>
+            <span ng-show="modificando.$id == p.$id">
+              <select  ng-model="p.unita" material-select watch>
+                <option>Kg</option>
+                <option>L</option>
+              </select>
+            </span>
+          </td>
+          <td>
+            <span ng-hide="modificando.$id == p.$id">{{p.quantita}}</span>
+            <input ng-show="modificando.$id == p.$id" ng-model="p.quantita" type="number" ng-pattern="/^[0-9]+(\.[0-9]{1,2})?$/" step="0.01">
+          </td>
+          <td>
+            <span ng-hide="modificando.$id == p.$id">{{p.data | date:'dd-MM-yyyy'}}</span>
+            <modifica-data ng-show="modificando.$id == p.$id" id="data" ng-model="p.data"></modifica-data>
+          </td>
+          <td>
+            <span ng-hide="modificando.$id == p.$id">{{p.carenza}}</span>
+            <input ng-show="modificando.$id == p.$id" ng-model="p.carenza" type="number" class="validate" ng-pattern="/^[0-9]+(\.[0-9]{1,2})?$/" step="0.01">
+          </td>
+          <td>
+            <span ng-hide="modificando.$id == p.$id || m == true" tooltipped data-position="top" data-delay="10" data-tooltip="Modifica">
+              <button class="btn-floating btn-extra-small" ng-click="modifica(p)">
+                <i class="material-icons">edit</i>
+              </button>
+            </span>
+            <span ng-show="modificando.$id == p.$id" tooltipped data-position="top" data-delay="10" data-tooltip="Salva">
+              <button class="btn-floating btn-extra-small green" ng-click="salva(p)">
+                <i class="material-icons">save</i>
+              </button>
+            </span>
+            <span ng-hide="modificando.$id == p.$id || m == true">
+              <a href="#elimina" ng-click="elimina(p)" modal class="btn-floating btn btn-extra-small red">
+                <i class="material-icons">delete</i>
+              </a>
+
+            </span>
+          </td>
+        </tr>
+
+        </tbody>
+      </table>
+
+      <div id="elimina" class="modal">
+        <div class="modal-content">
+          <h4>Sicuro di eliminare questa transazione?</h4>
+          <table class="striped highlight">
+            <thead>
+            <tr>
+              <th data-field="tipo-prodotto">Tipo Prodotto</th>
+              <th data-field="nome-commerciale">Nome Commerciale</th>
+              <th data-field="unita-di-misura">Unit&agrave di Misura</th>
+              <th data-field="giacenza">Giacenza</th>
+              <th data-field="data-di-carico">Data di Carico</th>
+              <th data-field="carenza">Carenza (gg)</th>
+              <th></th>
+            </tr>
+            </thead>
+
+            <tbody>
+            <tr>
+              <td>{{eliminando.tipoProdotto}}</td>
+              <td>{{eliminando.nomeCommerciale}}</td>
+              <td>{{eliminando.unita}}</td>
+              <td>{{eliminando.quantita}}</td>
+              <td>{{eliminando.data}}</td>
+              <td>{{eliminando.carenza}}</td>
+            </tr>
+            </tbody>
+          </table>
+
+        </div>
+        <div class="modal-footer center-align">
+          <a class=" btn modal-action modal-close waves-effect waves-light red" style="display: inline-block; margin: 15px">Annulla</a>
+          <a class=" btn modal-action modal-close waves-effect waves-light" style="display: inline-block; margin: 15px">Elimina</a>
+        </div>
+      </div>
+
+      <div ng-show="loading" ng-class="{'active':loading}" class="preloader-wrapper big" style="top:50px;left:50%;">
+        <div class="spinner-layer spinner-blue">
+          <div class="circle-clipper left">
+            <div class="circle"></div>
+          </div><div class="gap-patch">
+          <div class="circle"></div>
+        </div><div class="circle-clipper right">
+          <div class="circle"></div>
+        </div>
+        </div>
+
+        <div class="spinner-layer spinner-red">
+          <div class="circle-clipper left">
+            <div class="circle"></div>
+          </div><div class="gap-patch">
+          <div class="circle"></div>
+        </div><div class="circle-clipper right">
+          <div class="circle"></div>
+        </div>
+        </div>
+
+        <div class="spinner-layer spinner-yellow">
+          <div class="circle-clipper left">
+            <div class="circle"></div>
+          </div><div class="gap-patch">
+          <div class="circle"></div>
+        </div><div class="circle-clipper right">
+          <div class="circle"></div>
+        </div>
+        </div>
+
+        <div class="spinner-layer spinner-green">
+          <div class="circle-clipper left">
+            <div class="circle"></div>
+          </div><div class="gap-patch">
+          <div class="circle"></div>
+        </div><div class="circle-clipper right">
+          <div class="circle"></div>
+        </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</div>
+
+
+

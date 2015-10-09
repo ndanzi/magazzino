@@ -1,0 +1,158 @@
+<sub-header colore="colore" frutto="frutto" testo="testo"></sub-header>
+<div class="row">
+  <div class="col s12 m3 fermo">
+    <div class="row">
+      <h5 class="center-align">Inserisci Trattamento</h5>
+      <form name="trattamentoForm" ng-submit="aggiungiTrattamento(trattamentoForm.$valid, trattamento)" novalidate>
+        <div class="input-field col offset-m1 s12 m10">
+          <modifica-data modifica="false" label="Data Trattamento" id="data" ng-model="trattamento.data"></modifica-data>
+        </div>
+        <div class="input-field col offset-m1 s12 m10 margine">
+          <select ng-model="trattamento.prodotto" material-select watch>
+            <option ng-repeat="p in prodotti">{{p.nomeCommerciale}}</option>
+          </select>
+          <label>Prodotto</label>
+        </div>
+        <div class="input-field col offset-m1 s6 m5 ">
+          <input id="quantita" ng-model="trattamento.quantita" type="number" class="validate" ng-pattern="/^[0-9]+(\.[0-9]{1,2})?$/" step="0.01">
+          <label for="quantita">Quantit&agrave</label>
+        </div>
+        <div class="input-field col s6 m5">
+          <input id="superficie" ng-model="trattamento.superficie" type="number" class="validate" ng-pattern="/^[0-9]+(\.[0-9]{1,2})?$/" step="0.01">
+          <label for="superficie">Superficie</label>
+        </div>
+        <div class="input-field col offset-m1 s12 m10">
+          <input id="avversita" ng-model="trattamento.avversita" type="text" class="validate">
+          <label for="avversita">Avversit&agrave</label>
+        </div>
+        <div class="input-field col offset-m1 s12 m10">
+          <input id="note" ng-model="trattamento.note" type="text" class="validate">
+          <label for="note">Note</label>
+        </div>
+        <div class="row center-align">
+          <button type="submit" class="waves-effect waves-light btn-large col offset-s3 s6" style="display: inline-block; margin-top: 15px">Inserisci</button>
+        </div>
+      </form>
+
+    </div>
+
+  </div>
+  <div class="col offset-m3 s12 m9">
+    <div class="row">
+      <table class="striped highlight responsive-table">
+        <thead>
+        <tr>
+          <th data-field="data-trattamento">Data Trattamento</th>
+          <th data-field="prodotto">Prodotto</th>
+          <th data-field="quantita">Quantit&agrave imp.</th>
+          <th data-field="superficie">Superficie imp.</th>
+          <th data-field="aversita">Avversit&agrave</th>
+          <th data-field="note">Note</th>
+          <th></th>
+        </tr>
+        </thead>
+
+        <tbody ng-hide="loading">
+        <tr ng-repeat="t in trattamenti">
+          <td>
+            <span ng-hide="modificando.$id == t.$id">{{t.data | date:'dd-MM-yyyy'}}</span>
+            <span ng-show="modificando.$id == t.$id">
+              <modifica-data ng-model="t.data" modifica="true"></modifica-data>
+            </span>
+          </td>
+          <td>
+            <span ng-hide="modificando.$id == t.$id">{{t.prodotto}}</span>
+            <span ng-show="modificando.$id == t.$id">
+              <select ng-model="t.prodotto" material-select watch>
+                <option ng-repeat="p in prodotti">{{p.nomeCommerciale}}</option>
+              </select>
+            </span>
+          </td>
+          <td>
+            <span ng-hide="modificando.$id == t.$id">{{t.quantita}}</span>
+            <span ng-show="modificando.$id == t.$id">
+              <input ng-model="t.quantita" type="number" class="validate" ng-pattern="/^[0-9]+(\.[0-9]{1,2})?$/" step="0.01">
+            </span>
+          </td>
+          <td>
+            <span ng-hide="modificando.$id == t.$id">{{t.superficie}}</span>
+            <span ng-show="modificando.$id == t.$id">
+              <input ng-model="t.superficie" type="number" class="validate" ng-pattern="/^[0-9]+(\.[0-9]{1,2})?$/" step="0.01">
+            </span>
+          </td>
+          <td>
+            <span ng-hide="modificando.$id == t.$id">{{t.avversita}}</span>
+            <span ng-show="modificando.$id == t.$id">
+              <input ng-model="t.avversita" type="text" class="validate">
+            </span>
+          </td>
+          <td>
+            <span ng-hide="modificando.$id == t.$id">{{t.note}}</span>
+            <span ng-show="modificando.$id == t.$id">
+              <input ng-model="t.note" type="text" class="validate">
+            </span>
+          </td>
+          <td>
+            <span ng-hide="modificando.$id == t.$id || m == true" tooltipped data-position="top" data-delay="10" data-tooltip="Modifica">
+              <button class="btn-floating btn-extra-small" ng-click="modifica(t)">
+                <i class="material-icons">edit</i>
+              </button>
+            </span>
+            <span ng-show="modificando.$id == t.$id" tooltipped data-position="top" data-delay="10" data-tooltip="Salva">
+              <button class="btn-floating btn-extra-small green" ng-click="salva(t)">
+                <i class="material-icons">save</i>
+              </button>
+            </span>
+            <span ng-hide="modificando.$id == t.$id || m == true">
+              <a href="#elimina{{$index}}" modal class="btn-floating btn btn-extra-small red">
+                <i class="material-icons">delete</i>
+              </a>
+              <div id="elimina{{$index}}" class="modal">
+                <div class="modal-content">
+                  <h4>Sicuro di eliminare questo trattamento?</h4>
+                  <table class="striped highlight">
+                    <thead>
+                    <tr>
+                      <th data-field="data-trattamento">Data Trattamento</th>
+                      <th data-field="prodotto">Prodotto</th>
+                      <th data-field="quantita">Quantit&agrave imp.</th>
+                      <th data-field="superficie">Superficie imp.</th>
+                      <th data-field="aversita">Avversit&agrave</th>
+                      <th data-field="note">Note</th>
+                      <th></th>
+                    </tr>
+                    </thead>
+
+                    <tbody>
+                    <tr>
+                      <td>{{t.data | date:'dd-MM-yyyy'}}</td>
+                      <td>{{t.prodotto}}</td>
+                      <td>{{t.quantita}}</td>
+                      <td>{{t.superficie}}</td>
+                      <td>{{t.avversita}}</td>
+                      <td>{{t.note}}</td>
+                    </tr>
+                    </tbody>
+                  </table>
+
+                </div>
+                <div class="modal-footer center-align">
+                  <a class=" btn modal-action modal-close waves-effect waves-light red" style="display: inline-block; margin: 15px">Annulla</a>
+                  <a class=" btn modal-action modal-close waves-effect waves-light" style="display: inline-block; margin: 15px">Elimina</a>
+                </div>
+              </div>
+            </span>
+          </td>
+        </tr>
+
+
+
+        </tbody>
+      </table>
+
+      <spinner-loader></spinner-loader>
+    </div>
+  </div>
+
+</div>
+

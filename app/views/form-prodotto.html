@@ -1,0 +1,36 @@
+<form name="prodottoForm" ng-submit="onSubmit({valido: prodottoForm.$valid && datavalida})" novalidate>
+  <div class="input-field col offset-m1 s12 m10">
+    <modifica-data name="lamiadata" modifica="false" label="Data Carico" ng-model="prodotto.data" valid="datavalida"></modifica-data>
+  </div>
+  <div class="input-field col offset-m1 s12 m10">
+    <input id="tipo-prodotto" ng-model="prodotto.tipoProdotto"  type="text" class="validate" ng-disabled="!datavalida" required>
+    <label for="tipo-prodotto">Tipo Prodotto</label>
+  </div>
+  <div class="input-field col offset-m1 s12 m10">
+    <my-autocomplete ng-model="prodotto.nomeCommerciale" items="prodotti" disabled="!datavalida"></my-autocomplete>
+  </div>
+  <div class="input-field col offset-m1 s6 m5 ">
+    <input id="quantita" ng-model="prodotto.quantita" type="number" ng-pattern="/^[0-9]+(\.[0-9]{1,2})?$/" step="0.01" ng-disabled="!datavalida" required>
+    <label for="quantita">Quantit&agrave</label>
+  </div>
+  <div class="input-field col s6 m5">
+    <select class="" ng-model="prodotto.unita" material-select watch ng-disabled="!datavalida" required>
+      <option ng-disabled="!datavalida">Kg</option>
+      <option ng-disabled="!datavalida">L</option>
+    </select>
+    <label>Unit&agrave di misura</label>
+  </div>
+  <div class="input-field col offset-m1 s12 m10">
+    <input id="carenza" ng-model="prodotto.carenza" type="number" class="validate" ng-pattern="/^[0-9]*?$/" step="1" ng-disabled="!datavalida" required>
+    <label for="carenza">Carenza</label>
+  </div>
+
+  <div class="row">
+    <div class="input-field col offset-m1 s12 m10">
+      <div class="row">
+        <button type="submit" class="waves-effect waves-light btn-large col s5" >{{submitText}}</button>
+        <button class="waves-effect waves-light btn-large red col offset-s2 s5" ng-click="onDiscard()" >Annulla</button>
+      </div>
+    </div>
+  </div>
+</form>

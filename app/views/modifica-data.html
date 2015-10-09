@@ -1,0 +1,18 @@
+<input input-date
+       type="text"
+       id="mydata"
+       name="mydata"
+       ng-model="data"
+       months-full="{{ month }}"
+       months-short="{{ monthShort }}"
+       weekdays-full="{{ weekdaysFull }}"
+       weekdays-short="{{ weekdaysShort }}"
+       weekdays-letter="{{ weekdaysLetter }}"
+       container="body"
+       format="dd-mm-yyyy"
+       today="today"
+       clear="clear"
+       close="close"
+       max = {{maxDate}}
+  />
+<label ng-hide="modifica" for="mydata" data-error="Inserire prima la data">{{label}}</label>
