@@ -13,7 +13,7 @@ describe('Directive: formProdotto', function () {
   }));
 
   it('should make hidden element visible', inject(function ($compile) {
-    element = angular.element('<form-prodotto></form-prodotto>');
+    element = angular.element('<form-carico></form-carico>');
     element = $compile(element)(scope);
     expect(element.text()).toBe('this is the formProdotto directive');
   }));

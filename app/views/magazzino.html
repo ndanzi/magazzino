@@ -21,10 +21,10 @@
       <h5 class="center-align">Inserisci Prodotto</h5>
       <form name="prodottoForm" ng-submit="aggiungiProdotto(prodottoForm.$valid)" novalidate>
         <div class="input-field col offset-m1 s12 m10">
-          <modifica-data modifica="false" label="Data Carico" ng-model="prodotto.data"></modifica-data>
+          <modifica-data modifica="false" label="Data Carico" ng-model="carico.data"></modifica-data>
         </div>
         <div class="input-field col offset-m1 s12 m10">
-          <input id="tipo-prodotto" ng-model="prodotto.tipoProdotto" type="text" class="validate">
+          <input id="tipo-prodotto" ng-model="carico.tipoProdotto" type="text" class="validate">
           <label for="tipo-prodotto">Tipo Prodotto</label>
         </div>
         <div class="input-field col offset-m1 s12 m10">
@@ -32,7 +32,7 @@
                             placeholder="Nome Commerciale"
                             pause="100"
                             selected-object="prodottoSelezionato"
-                            local-data="prodotti"
+                            local-data="carichi"
                             search-fields="nomeCommerciale"
                             title-field="nomeCommerciale"
                             minlength="1"
@@ -40,18 +40,18 @@
             />
         </div>
         <div class="input-field col offset-m1 s6 m5 ">
-          <input id="quantita" ng-model="prodotto.quantita" type="number" ng-pattern="/^[0-9]+(\.[0-9]{1,2})?$/" step="0.01">
+          <input id="quantita" ng-model="carico.quantita" type="number" ng-pattern="/^[0-9]+(\.[0-9]{1,2})?$/" step="0.01">
           <label for="quantita">Quantit&agrave</label>
         </div>
         <div class="input-field col s6 m5">
-          <select class="" ng-model="prodotto.unita" material-select watch>
+          <select class="" ng-model="carico.unita" material-select watch>
             <option>Kg</option>
             <option>L</option>
           </select>
           <label>Unit&agrave di misura</label>
         </div>
         <div class="input-field col offset-m1 s12 m10">
-          <input id="carenza" ng-model="prodotto.carenza" type="number" class="validate" ng-pattern="/^[0-9]+(\.[0-9]{1,2})?$/" step="0.01">
+          <input id="carenza" ng-model="carico.carenza" type="number" class="validate" ng-pattern="/^[0-9]+(\.[0-9]{1,2})?$/" step="0.01">
           <label for="carenza">Carenza</label>
         </div>
 
@@ -69,7 +69,7 @@
       <table class="striped highlight responsive-table">
         <thead>
         <tr>
-          <th data-field="tipo-prodotto">Tipo Prodotto</th>
+          <th data-field="tipo-carico">Tipo Prodotto</th>
           <th data-field="nome-commerciale">Nome Commerciale</th>
           <th data-field="unita-di-misura">Unit&agrave di Misura</th>
           <th data-field="giacenza">Giacenza</th>
@@ -80,7 +80,7 @@
         </thead>
 
         <tbody ng-hide="loading">
-        <tr ng-repeat="p in prodotti">
+        <tr ng-repeat="p in carichi">
           <td>
             <span ng-hide="modificando.$id == p.$id">{{p.tipoProdotto}}</span>
             <input ng-show="modificando.$id == p.$id" ng-model="p.tipoProdotto" type="text" class="validate">
@@ -139,7 +139,7 @@
           <table class="striped highlight">
             <thead>
             <tr>
-              <th data-field="tipo-prodotto">Tipo Prodotto</th>
+              <th data-field="tipo-carico">Tipo Prodotto</th>
               <th data-field="nome-commerciale">Nome Commerciale</th>
               <th data-field="unita-di-misura">Unit&agrave di Misura</th>
               <th data-field="giacenza">Giacenza</th>

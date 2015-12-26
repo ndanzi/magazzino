@@ -13,7 +13,7 @@ angular.module('magazzinoApp')
     $scope.colore = 'brown lighten-2';
     $scope.frutto = 'Magazzino';
 
-    $scope.prodotto = {};
+    $scope.carico = {};
     $scope.m = false;
     $scope.loading = true;
     $scope.mode = 'view';
@@ -27,7 +27,7 @@ angular.module('magazzinoApp')
     })
 
     $scope.viewMode = function() {
-      $scope.prodotto = {};
+      $scope.carico = {};
       $scope.m = false;
       $scope.mode = 'view';
       $scope.operazioni = 'Operazioni';
@@ -56,30 +56,28 @@ angular.module('magazzinoApp')
     $scope.selected = function(item) {
       console.log(item);
       if($scope.mode !== 'insert') {
-        $scope.prodotto = item;
+        $scope.carico = item;
         $scope.selezionato = true;
       }
 
     }
 
-    console.log($scope.prodotti);
+    console.log($scope.carichi);
 
-    $scope.aggiungiProdotto = function(valido) {
+    $scope.aggiungiCarico = function(valido) {
       console.log('valido', valido);
       if(valido) {
-        $scope.prodotti.$add($scope.prodotto);
-        $scope.prodotto = {};
+        $scope.carichi.$add($scope.carico);
+        $scope.carico = {};
         $scope.viewMode();
       }
     }
 
     $scope.salva = function(valido) {
       if(valido) {
-        /*var item = $scope.prodotti.$getRecord($scope.modificando.$id);
-        item = $scope.modificando;*/
-        console.log($scope.prodotto);
-        $scope.prodotti.$save($scope.prodotto);
-        $scope.prodotto = {};
+        console.log($scope.carico);
+        $scope.prodotti.$save($scope.carico);
+        $scope.carico = {};
         $scope.m = false;
         $scope.viewMode();
       }
@@ -87,7 +85,7 @@ angular.module('magazzinoApp')
     }
 
     $scope.elimina = function() {
-      $scope.prodotti.$remove($scope.prodotto);
+      $scope.carichi.$remove($scope.carico);
       $scope.viewMode();
     }
   }])

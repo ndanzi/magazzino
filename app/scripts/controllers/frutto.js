@@ -40,7 +40,7 @@ angular.module('magazzinoApp')
     $scope.loading = true;
 
     $scope.trattamenti = new $firebaseArray(Ref.child('trattamenti').child($scope.frutto).orderByChild('data'));
-    $scope.prodotti = new $firebaseArray(Ref.child('prodotti'));
+    $scope.carichi = new $firebaseArray(Ref.child('carichi'));
 
     $scope.trattamenti.$loaded().then(function() {
       $scope.loading = false;

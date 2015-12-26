@@ -4,21 +4,21 @@
     <div class="row operazioni">
       <h5 class="center-align">{{operazioni}}</h5>
       <div ng-slide-down="mode === 'insert'" lazy-render>
-        <form-prodotto prodotto="prodotto" prodotti="prodotti" on-submit="aggiungiProdotto(valido)" submit-text="Inserisci" on-discard="viewMode()"></form-prodotto>
+        <form-prodotto prodotto="carico" prodotti="prodotti" on-submit="aggiungiCarico(valido)" submit-text="Inserisci" on-discard="viewMode()"></form-prodotto>
       </div>
       <div ng-slide-down="mode === 'edit' && selezionato" lazy-render>
-        <form-prodotto prodotto="prodotto" prodotti="prodotti" on-submit="salva(valido)" submit-text="Salva" on-discard="viewMode()"></form-prodotto>
+        <form-prodotto prodotto="carico" prodotti="prodotti" on-submit="salva(valido)" submit-text="Salva" on-discard="viewMode()"></form-prodotto>
       </div>
       <div  ng-slide-down="mode === 'delete' && selezionato" lazy-render>
         <div>
           <ul class="collection with-header">
             <li class="collection-header"><h5>Cancellare il carico:</h5></li>
-            <li class="collection-item"><b>Tipo Prodotto: </b>{{prodotto.tipoProdotto}}</li>
-            <li class="collection-item"><b>Nome Commerciale: </b>{{prodotto.nomeCommerciale}}</li>
-            <li class="collection-item"><b>Unità di misura: </b>{{prodotto.unita}}</li>
-            <li class="collection-item"><b>Quantità: </b>{{prodotto.quantita}}</li>
-            <li class="collection-item"><b>Data di Carico </b>{{prodotto.data | date:'dd-MM-yyyy'}}</li>
-            <li class="collection-item"><b>Carenza: </b>{{prodotto.carenza}}</li>
+            <li class="collection-item"><b>Tipo Prodotto: </b>{{carico.tipoProdotto}}</li>
+            <li class="collection-item"><b>Nome Commerciale: </b>{{carico.nomeCommerciale}}</li>
+            <li class="collection-item"><b>Unità di misura: </b>{{carico.unita}}</li>
+            <li class="collection-item"><b>Quantità: </b>{{carico.quantita}}</li>
+            <li class="collection-item"><b>Data di Carico </b>{{carico.data | date:'dd-MM-yyyy'}}</li>
+            <li class="collection-item"><b>Carenza: </b>{{carico.carenza}}</li>
           </ul>
         </div>
         <div class="row">
@@ -34,12 +34,12 @@
         <div>
           <ul class="collection with-header" style="margin-bottom: 0">
             <li class="collection-header"><h5>Carico selezionato:</h5></li>
-            <li class="collection-item"><b>Tipo Prodotto: </b>{{prodotto.tipoProdotto}}</li>
-            <li class="collection-item"><b>Nome Commerciale: </b>{{prodotto.nomeCommerciale}}</li>
-            <li class="collection-item"><b>Unità di misura: </b>{{prodotto.unita}}</li>
-            <li class="collection-item"><b>Quantità: </b>{{prodotto.quantita}}</li>
-            <li class="collection-item"><b>Data di Carico </b>{{prodotto.data | date:'dd-MM-yyyy'}}</li>
-            <li class="collection-item"><b>Carenza: </b>{{prodotto.carenza}}</li>
+            <li class="collection-item"><b>Tipo Prodotto: </b>{{carico.tipoProdotto}}</li>
+            <li class="collection-item"><b>Nome Commerciale: </b>{{carico.nomeCommerciale}}</li>
+            <li class="collection-item"><b>Unità di misura: </b>{{carico.unita}}</li>
+            <li class="collection-item"><b>Quantità: </b>{{carico.quantita}}</li>
+            <li class="collection-item"><b>Data di Carico </b>{{carico.data | date:'dd-MM-yyyy'}}</li>
+            <li class="collection-item"><b>Carenza: </b>{{carico.carenza}}</li>
           </ul>
         </div>
         <div class="row" >
@@ -56,7 +56,7 @@
 
 
       </div>
-      <div ng-slide-down="mode === 'edit' && !selezionato" lazy-render>
+      <div ng-slide-down="mode === 'edit' && !selezionato" lazy-render >
         <h4 class="center-align">Fai Click sulla riga del carico da modificare</h4>
         <div class="row">
           <button class="waves-effect waves-light btn-large red col offset-s2 s8" ng-click="viewMode()" >Annulla</button>
@@ -106,7 +106,7 @@
               </tr>
             </thead>
             <tbody >
-              <tr ng-repeat="p in prodotti" class=" pointer" ng-animate="'animate'" ng-click="selected(p)">
+              <tr ng-repeat="p in prodotti" class=" pointer" ng-animate="'animate'" ng-click="selected(p)" ng-class="{'green lighten-3': p.$id === carico.$id}">
                 <td>
                   <span>{{p.tipoProdotto}}</span>
                 </td>

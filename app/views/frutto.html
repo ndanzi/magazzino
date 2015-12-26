@@ -8,8 +8,8 @@
           <modifica-data modifica="false" label="Data Trattamento" id="data" ng-model="trattamento.data"></modifica-data>
         </div>
         <div class="input-field col offset-m1 s12 m10 margine">
-          <select ng-model="trattamento.prodotto" material-select watch>
-            <option ng-repeat="p in prodotti">{{p.nomeCommerciale}}</option>
+          <select ng-model="trattamento.carico" material-select watch>
+            <option ng-repeat="p in carichi">{{p.nomeCommerciale}}</option>
           </select>
           <label>Prodotto</label>
         </div>
@@ -43,7 +43,7 @@
         <thead>
         <tr>
           <th data-field="data-trattamento">Data Trattamento</th>
-          <th data-field="prodotto">Prodotto</th>
+          <th data-field="carico">Prodotto</th>
           <th data-field="quantita">Quantit&agrave imp.</th>
           <th data-field="superficie">Superficie imp.</th>
           <th data-field="aversita">Avversit&agrave</th>
@@ -61,10 +61,10 @@
             </span>
           </td>
           <td>
-            <span ng-hide="modificando.$id == t.$id">{{t.prodotto}}</span>
+            <span ng-hide="modificando.$id == t.$id">{{t.carico}}</span>
             <span ng-show="modificando.$id == t.$id">
-              <select ng-model="t.prodotto" material-select watch>
-                <option ng-repeat="p in prodotti">{{p.nomeCommerciale}}</option>
+              <select ng-model="t.carico" material-select watch>
+                <option ng-repeat="p in carichi">{{p.nomeCommerciale}}</option>
               </select>
             </span>
           </td>
@@ -114,7 +114,7 @@
                     <thead>
                     <tr>
                       <th data-field="data-trattamento">Data Trattamento</th>
-                      <th data-field="prodotto">Prodotto</th>
+                      <th data-field="carico">Prodotto</th>
                       <th data-field="quantita">Quantit&agrave imp.</th>
                       <th data-field="superficie">Superficie imp.</th>
                       <th data-field="aversita">Avversit&agrave</th>
@@ -126,7 +126,7 @@
                     <tbody>
                     <tr>
                       <td>{{t.data | date:'dd-MM-yyyy'}}</td>
-                      <td>{{t.prodotto}}</td>
+                      <td>{{t.carico}}</td>
                       <td>{{t.quantita}}</td>
                       <td>{{t.superficie}}</td>
                       <td>{{t.avversita}}</td>
